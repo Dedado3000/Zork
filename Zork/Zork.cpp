@@ -2,10 +2,70 @@
 //
 
 #include <iostream>
+#include <string>
+#include <vector>
+#include <conio.h>
+#include "Utils.h"
+#include "World.h"
+
+using namespace std;
+
+
+#define MACHINECOLOR_ "\033[1;36m"
+#define _MACHINECOLOR "\033[0m"
+
+
+#define ERRORCOLOR_ "\033[4;31m"
+#define _ERRORCOLOR "\033[0m"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	char key;
+	string player_action;
+	vector<string> args;
+	args.reserve(10);
+
+	cout << "-------------------------\n";
+	cout << MACHINECOLOR_ "Welcome to Zork by David Martin!\n" _MACHINECOLOR;
+	cout << "-------------------------\n";
+
+	World world;
+
+	args.push_back("open");
+
+	while (true)
+	{
+		if (args.size() == 0)
+		{
+			cin >> player_action;
+			Tokenize(player_action, args);
+
+		}
+
+
+
+
+		//Exit Game
+		if (args.size() > 0 && (IsEquals(args[0], "quit") || IsEquals(args[0], "exit") || IsEquals(args[0], "salir")))
+			break;
+
+		//Loop de juego
+		if (world.PerformAction(args) == false)
+			cout << ERRORCOLOR_ "\nNo valid action input.\n" _ERRORCOLOR;
+
+
+
+		if (args.size() > 0)
+		{
+			args.clear();
+			player_action = "";
+			cout << "> ";
+		}
+	}
+
+
+	cout << MACHINECOLOR_ "\nThanks for playing my game\n" _MACHINECOLOR;
+	return 0;
 }
 
 // Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar
