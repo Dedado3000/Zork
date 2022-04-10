@@ -10,7 +10,8 @@ using namespace std;
 enum ItemT
 {
 	I_Common,
-	I_Key
+	I_Key,
+	I_Container
 };
 
 class Item :

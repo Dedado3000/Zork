@@ -23,7 +23,7 @@ World::World()
 	entities.push_back(House);
 	/* CONECTIONS*/
 	Exit* exit1 = new Exit("Path", "An old path who lived better times", Facade, Street, D_South, D_North);
-	Exit* exit2 = new Exit("Path", "An old path who lived better times", Facade, House, D_West, D_East);
+	Exit* exit2 = new Exit("Door", "An old who seems locked", Facade, House, D_West, D_East);
 
 	exit2->locked = true;
 
@@ -31,6 +31,12 @@ World::World()
 	entities.push_back(exit2);
 
 	/* ITEMS*/
+
+	Item* item1 = new Item("Trash", "A typical big trash who seem empty", House, I_Container, "Maybe there is something inside");
+	Item* item2 = new Item("Letter", "A letter with typical congrats text, try to look", item1, I_Common, "Thank you for playing my game, you can exit typing 'exit' or 'quit'");
+
+	entities.push_back(item1);
+	entities.push_back(item2);
 
 	Item* key = new Item("Key", "A pinky key with the phrase 'dear house'", Street, I_Key, "Maybe this can help me opening some door");
 
@@ -94,9 +100,10 @@ bool World::ConvertAction(vector<string>& args)
 			player->Look(args);
 		else if (IsEquals(args[0], "inventory") || IsEquals(args[0], "bag"))
 			player->Inventory();
+		else if (IsEquals(args[0], "go"))
+			cout << "Go where?\n";
 		else
 			canConvert = false;
-
 		break;
 	case 2:
 		if (IsEquals(args[0], "look"))
@@ -109,9 +116,22 @@ bool World::ConvertAction(vector<string>& args)
 			player->Drop(args);
 		else if (IsEquals(args[0], "inventory") || IsEquals(args[0], "bag"))
 			player->Inventory();
+		else if (IsEquals(args[0], "open") || IsEquals(args[0], "close") )
+			cout << "You need a item to use as key\n";
 		else
 			canConvert = false;
-
+		break;
+	case 3:
+		if (IsEquals(args[0], "open"))
+			player->Open(args);
+		else if (IsEquals(args[0], "close"))
+			player->Close(args);
+		else if (IsEquals(args[0], "pick") || IsEquals(args[0], "take"))
+			player->Take(args);
+		else if (IsEquals(args[0], "drop"))
+			player->Drop(args);
+		else
+			canConvert = false;
 		break;
 	default:
 		canConvert = false;
