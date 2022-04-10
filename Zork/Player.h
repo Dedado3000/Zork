@@ -18,5 +18,7 @@ public:
 	virtual void Look(const vector<string>& args) const;
 	virtual bool Take(const vector<string>& args);
 	virtual bool Drop(const vector<string>& args);
+	virtual bool Open(const vector<string>& args);
+	virtual bool Close(const vector<string>& args);
 };
 

@@ -30,7 +30,7 @@ void Room::Look() const
 		if ((*it)->type == T_Exit)
 		{
 			Exit* ex = (Exit*)*it;
-			cout << "- to the " << ex->GetDirectionFrom(this) << " you can see " << ex->GetDestinationFrom(this)->name << "\n";
+			cout << "- to the " << ex->GetDirectionFrom(this) << " you can see a "<< ex->name << " to go to the " << ex->GetDestinationFrom(this)->name << "\n";
 		}
 	}
 	/* ITEMS*/

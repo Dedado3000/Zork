@@ -76,7 +76,7 @@ bool Player::Go(const vector<string>& args)
 	{
 		if (exit->locked == true)
 		{
-			cout << "The door is locked try to open it with a key\n";
+			cout << "The "<<exit->name << " is locked try to open it with a key\n";
 			return true;
 		}
 
@@ -147,4 +147,93 @@ void Player::Inventory() const
 	
 	//Not Yet Implemented
 
+}
+
+
+bool Player::Open(const vector<string>& args)
+{
+	for (list<Entity*>::const_iterator it = parent->contain.begin(); it != parent->contain.cend(); ++it)
+	{
+		if ((*it)->type == T_Exit)
+		{
+			Exit* ex = (Exit*)*it;
+			if (ex->key != NULL && args[1].compare(ex->name) == 0)
+			{
+				if (args[2].compare(ex->key->name)==0)
+				{
+					for (list<Entity*>::const_iterator it2 = contain.begin(); it2 != contain.cend(); ++it2)
+					{
+						if (*it2 == ex->key)
+						{
+							ex->locked = false;
+							cout << "-|- You feel a click and " << ex->name << " opened with " << args[2] << "\n";
+							return true;
+						}
+					}
+					cout << "-|- I dont have " << args[2] << " in my inventory\n";
+					return true;
+				}
+				else
+				{
+					for (list<Entity*>::const_iterator it2 = contain.begin(); it2 != contain.cend(); ++it2)
+					{
+						if (args[2].compare((*it2)->name) == 0)
+						{
+							cout << "-|- I can't Open " << ex->name << " with " << args[2] << "\n";
+							return true;
+						}
+					}
+					cout << "-|- I dont have "<< args[2] << " in my inventory\n";
+					return true;
+
+				}
+			}
+		}
+	}
+	cout << "-|- There is no Path with the name "<< args[1] <<"\n";
+	return true;
+}
+
+bool Player::Close(const vector<string>& args)
+{
+	for (list<Entity*>::const_iterator it = parent->contain.begin(); it != parent->contain.cend(); ++it)
+	{
+		if ((*it)->type == T_Exit)
+		{
+			Exit* ex = (Exit*)*it;
+			if (ex->key != NULL && args[1].compare(ex->name) == 0)
+			{
+				if (args[2].compare(ex->key->name) == 0)
+				{
+					for (list<Entity*>::const_iterator it2 = contain.begin(); it2 != contain.cend(); ++it2)
+					{
+						if (*it2 == ex->key)
+						{
+							ex->locked = true;
+							cout << "-|- You feel a click and " << ex->name << " closed with " << args[2] << "\n";
+							return true;
+						}
+					}
+					cout << "-|- I dont have " << args[2] << " in my inventory\n";
+					return true;
+				}
+				else
+				{
+					for (list<Entity*>::const_iterator it2 = contain.begin(); it2 != contain.cend(); ++it2)
+					{
+						if (args[2].compare((*it2)->name) == 0)
+						{
+							cout << "-|- I can't Close " << ex->name << " with " << args[2] << "\n";
+							return true;
+						}
+					}
+					cout << "-|- I dont have " << args[2] << " in my inventory\n";
+					return true;
+
+				}
+			}
+		}
+	}
+	cout << "-|- There is no Path with the name " << args[1] << "\n";
+	return true;
 }
