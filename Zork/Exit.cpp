@@ -59,7 +59,7 @@ const string Exit::ConvertDirection(Direction dir) const
 			break;
 		case 2: str = "South";
 			break;
-		case 4: str = "West";
+		case 3: str = "West";
 			break;
 		default:
 			break;

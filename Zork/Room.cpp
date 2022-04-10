@@ -1,8 +1,10 @@
 #include "Room.h"
 
 #include "Exit.h"
+#include "Item.h"
 #include "Utils.h"
 #include <iostream>
+
 
 
 Room::Room(const char* name, const char* description)
@@ -28,9 +30,19 @@ void Room::Look() const
 		if ((*it)->type == T_Exit)
 		{
 			Exit* ex = (Exit*)*it;
-			cout << "\nto the " << ex->GetDirectionFrom(this) << " you can see " << ex->GetDestinationFrom(this)->name << "\n";
+			cout << "- to the " << ex->GetDirectionFrom(this) << " you can see " << ex->GetDestinationFrom(this)->name << "\n";
 		}
 	}
+	/* ITEMS*/
+	for (list<Entity*>::const_iterator it = contain.begin(); it != contain.cend(); ++it)
+	{
+		if ((*it)->type == T_Item)
+		{
+			Item* item = (Item*)*it;
+			cout << "\n- In the floor you can see a " << item->name << "\n";
+		}
+	}
+
 
 }
 

@@ -29,6 +29,10 @@ bool IsEquals(const string& a, const char* b)
 	return _stricmp(a.c_str(), b) == 0;
 }
 
+bool IsEquals(const string& a, string* b)
+{
+	return _stricmp(a.c_str(), b->c_str()) == 0;
+}
 
 /*
 * ConvertString()

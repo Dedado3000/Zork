@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Exit.h"
+#include "Item.h"
 #include "Room.h"
 #include "Utils.h"
 #include <iostream>
@@ -73,6 +74,12 @@ bool Player::Go(const vector<string>& args)
 
 	if (exit != NULL)
 	{
+		if (exit->locked == true)
+		{
+			cout << "The door is locked try to open it with a key\n";
+			return true;
+		}
+
 		cout << "\nYou go From your position to " << exit->GetDestinationFrom((Room*)parent)->name << "...\n" << "When you arrive you";
 		ChangeParent(exit->GetDestinationFrom((Room*)parent));
 		parent->Look();
@@ -86,18 +93,58 @@ bool Player::Go(const vector<string>& args)
 
 bool Player::Take(const vector<string>& args)
 {
-	//Not Yet Implemented
+
+	for (list<Entity*>::const_iterator it = parent->contain.begin(); it != parent->contain.cend(); ++it)
+	{
+		if ((*it)->type == T_Item)
+		{
+			Item* item = (Item*)*it;
+			if (args[1].compare(item->name) == 0)
+			{
+				item->ChangeParent((Entity*)this);
+				cout << "-|- You picked " << item->name << "\n";
+				return true;
+			}
+		}
+	}
+	cout << "-|- There is nothing to pick with that name\n";
+
 	return true;
 }
 
 bool Player::Drop(const vector<string>& args)
 {
-	//Not Yet Implemented
+
+	for (list<Entity*>::const_iterator it = contain.begin(); it != contain.cend(); ++it)
+	{
+		if ((*it)->type == T_Item)
+		{
+			Item* item = (Item*)*it;
+			if (args[1].compare(item->name) == 0)
+			{
+				item->ChangeParent(this->parent);
+				cout << "-|- You droped " << item->name << "\n";
+				return true;
+			}
+		}
+	}
+	cout << "-|- There is nothing to drop with that name\n";
 	return true;
 }
 
 void Player::Inventory() const
 {
+	cout << "> You open your bag\n";
+	for (list<Entity*>::const_iterator it = contain.begin(); it != contain.cend(); ++it) 
+	{
+		if ((*it)->type == T_Item)
+		{
+			Item* item = (Item*)*it;
+			item->Look();
+		}
+	}
+	cout << "> You close your bag\n";
+	
 	//Not Yet Implemented
 
 }

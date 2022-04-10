@@ -57,6 +57,7 @@ int main()
 		{
 			args.clear();
 			player_action = "";
+			cout << "<------------------------->\n";
 			cout << "> ";
 		}
 	}
