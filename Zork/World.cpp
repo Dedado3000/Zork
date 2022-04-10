@@ -33,8 +33,10 @@ World::World()
 	/* ITEMS*/
 
 	Item* item1 = new Item("Trash", "A typical big trash who seem empty", House, I_Container, "Maybe there is something inside");
+	Item* item2 = new Item("Letter", "A letter with typical congrats text, try to look", item1, I_Common, "Thank you for playing my game, you can exit typing 'exit' or 'quit'");
 
 	entities.push_back(item1);
+	entities.push_back(item2);
 
 	Item* key = new Item("Key", "A pinky key with the phrase 'dear house'", Street, I_Key, "Maybe this can help me opening some door");
 
@@ -124,6 +126,10 @@ bool World::ConvertAction(vector<string>& args)
 			player->Open(args);
 		else if (IsEquals(args[0], "close"))
 			player->Close(args);
+		else if (IsEquals(args[0], "pick") || IsEquals(args[0], "take"))
+			player->Take(args);
+		else if (IsEquals(args[0], "drop"))
+			player->Drop(args);
 		else
 			canConvert = false;
 		break;
