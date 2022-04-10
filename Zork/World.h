@@ -3,7 +3,6 @@
 #include <string>
 #include <list>
 #include <vector>
-#include <time.h>
 
 
 using namespace std;
@@ -11,6 +10,7 @@ using namespace std;
 
 
 class Entity;
+class Player;
 
 class World
 {
@@ -25,6 +25,6 @@ public:
 private:
 
 	list<Entity*> entities;
-	Entity* player;
+	Player* player;
 };
 
