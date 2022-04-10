@@ -10,24 +10,32 @@ enum Direction
 	D_North,
 	D_East,
 	D_South,
-	D_West
+	D_West,
+	D_Novalid
 };
 
 class Exit :
 	public Entity
 {
 public:
-	Exit(const char* name, const char* opposite_name, const char* description, Room* origin, Room* destination);
-	~Exit();
+	Exit(const char* name, const char* description, Room* origin, Room* destination, Direction direction, Direction directionDestination);
+	~Exit() {};
+
+	void update() {};
 
 	void Look() const;
 
-	const string& GetNameFrom(const Room* room) const;
+	const string GetDirectionFrom(const Room* room) const;
 	Room* GetDestinationFrom(const Room* room) const;
+
+	/* CONVERTERS */
+	const string ConvertDirection(Direction dir) const;
+	//const Direction ConvertString(string dir) const;
+
 
 public:
 	bool locked;
-	Direction direction;
+	Direction direction,directionDestination;
 	Room* destination;
 	Entity* key;
 };
