@@ -7,29 +7,34 @@ using namespace std;
 
 enum Type
 {
-	Creature,
-	Exit,
-	Room,
-	Item
+	T_Creature,
+	T_Exit,
+	T_Room,
+	T_Item,
+	T_Player
 };
 
 class Entity
 {
-private:
+
+public:
+	Entity(const char* name, const char* description, Entity* parent);
+	virtual ~Entity() {};
+
+	virtual void Update() {};
+
+	//Helpers
+	void ChangeParent(Entity* parent);
+
+	//Actions
+	virtual void Look()const;
+
+public:
 	Type type;
 	string name;
 	string description;
 
 	Entity* parent;
 	list<Entity*> contain;
-
-public:
-	Entity(const char* name, const char* description, Entity* parent);
-	virtual ~Entity();
-
-	virtual void Update();
-	virtual void Look();
-
-
 };
 

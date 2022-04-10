@@ -31,18 +31,16 @@ int main()
 
 	World world;
 
-	args.push_back("open");
+	args.push_back("look");
 
 	while (true)
 	{
+
 		if (args.size() == 0)
 		{
-			cin >> player_action;
+			getline(cin, player_action);
 			Tokenize(player_action, args);
-
 		}
-
-
 
 
 		//Exit Game
