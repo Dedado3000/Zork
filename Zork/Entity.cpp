@@ -11,15 +11,16 @@ Entity::Entity(const char* name, const char* description, Entity* parent = NULL)
 
 /* HELPERS */
 
-void Entity::ChangeParent(Entity* parent_new)
+void Entity::ChangeParent(Entity* parent_to_change)
 {
-	if (parent_new != NULL)
-	{
-		if (parent != NULL)
-			parent->contain.remove(this);
-		parent = parent_new;
+
+	if (parent != NULL)
+		parent->contain.remove(this);
+
+	parent = parent_to_change;
+
+	if (parent != NULL)
 		parent->contain.push_back(this);
-	}
 }
 
 /* ACTIONS */

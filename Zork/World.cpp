@@ -4,7 +4,9 @@
 #include "Creature.h"
 #include "Player.h"
 #include "Room.h"
+#include "Exit.h"
 #include "Utils.h"
+#include "Item.h"
 #include <iostream>
 
 
@@ -13,11 +15,32 @@ World::World()
 {
 	/* ROOMS */
 	Room* Facade = new Room("Facade", "You are in front of a big white house.");
+	Room* Street = new Room("Street", "Its an old route with no movement.");
+	Room* House = new Room("House", "It seems less wide when you are inside.");
 
 	entities.push_back(Facade);
+	entities.push_back(Street);
+	entities.push_back(House);
+	/* CONECTIONS*/
+	Exit* exit1 = new Exit("Path", "An old path who lived better times", Facade, Street, D_South, D_North);
+	Exit* exit2 = new Exit("Path", "An old path who lived better times", Facade, House, D_West, D_East);
+
+	exit2->locked = true;
+
+	entities.push_back(exit1);
+	entities.push_back(exit2);
+
+	/* ITEMS*/
+
+	Item* key = new Item("Key", "A pinky key with the phrase 'dear house'", Street, I_Key, "Maybe this can help me opening some door");
+
+	exit2->key = key;
+	entities.push_back(key);
+
 
 	/* PLAYER */
 	player = new Player("Yourself", "You look so bad, please get a shower soon",Facade);
+
 	entities.push_back(player);
 }
 
@@ -52,6 +75,15 @@ void World::UpdateGame()
 
 }
 
+
+/*
+* ConvertAction()
+* Convert player action into the world actionm
+* Input:
+	vector<string>& args <- Instructions to do
+  Output:
+	bool <- The action can be performed or not
+*/
 bool World::ConvertAction(vector<string>& args)
 {
 	bool canConvert = true;
@@ -60,6 +92,8 @@ bool World::ConvertAction(vector<string>& args)
 	case 1:
 		if (IsEquals(args[0], "look"))
 			player->Look(args);
+		else if (IsEquals(args[0], "inventory") || IsEquals(args[0], "bag"))
+			player->Inventory();
 		else
 			canConvert = false;
 
@@ -67,6 +101,14 @@ bool World::ConvertAction(vector<string>& args)
 	case 2:
 		if (IsEquals(args[0], "look"))
 			player->Look(args);
+		else if (IsEquals(args[0], "go"))
+			player->Go(args);
+		else if (IsEquals(args[0], "pick") || IsEquals(args[0], "take") )
+			player->Take(args);
+		else if (IsEquals(args[0], "drop"))
+			player->Drop(args);
+		else if (IsEquals(args[0], "inventory") || IsEquals(args[0], "bag"))
+			player->Inventory();
 		else
 			canConvert = false;
 
