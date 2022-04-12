@@ -25,6 +25,6 @@ void Item::Look() const
 			cout << "- You find a " << (*it)->name << "\n";
 		}
 
-		cout << "\There is nothing left in the " << name << "\n";
+		cout << "\nThere is nothing left in the " << name << "\n";
 	}
 }

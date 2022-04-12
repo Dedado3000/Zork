@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "Creature.h"
 #include "Player.h"
+#include "NPC.h"
 #include "Room.h"
 #include "Exit.h"
 #include "Utils.h"
@@ -33,7 +34,8 @@ World::World()
 	/* ITEMS*/
 
 	Item* item1 = new Item("Trash", "A typical big trash who seem empty", House, I_Container, "Maybe there is something inside");
-	Item* item2 = new Item("Letter", "A letter with typical congrats text, try to look", item1, I_Common, "Thank you for playing my game, you can exit typing 'exit' or 'quit'");
+	Item* item2 = new Item("Letter", "A letter with typical congrats text, try to look", item1, I_Common, "Thanks, you found the 'easterEgg', this isn't the item that Timmy is searching");
+	Item* toy = new Item("Toy", "Timmy Favourite Toy, it's a giant square", item1, I_Common, "Thank you for playing my game, you can exit typing 'exit' or 'quit'");
 
 	entities.push_back(item1);
 	entities.push_back(item2);
@@ -42,6 +44,11 @@ World::World()
 
 	exit2->key = key;
 	entities.push_back(key);
+
+	/* NPC */
+	NPC* timmy = new NPC("Timmy", "Your friend from Highschool", House, toy, "I lost my Toy, can you help me and Giving back?", "Thanks for your help, remember you can exit from this simulation typing exit");
+	entities.push_back(timmy);
+
 
 
 	/* PLAYER */

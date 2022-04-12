@@ -11,7 +11,8 @@ enum Type
 	T_Exit,
 	T_Room,
 	T_Item,
-	T_Player
+	T_Player,
+	T_NPC
 };
 
 class Entity

@@ -33,6 +33,15 @@ void Room::Look() const
 			cout << "- to the " << ex->GetDirectionFrom(this) << " you can see a "<< ex->name << " to go to the " << ex->GetDestinationFrom(this)->name << "\n";
 		}
 	}
+	/* NPC*/
+	for (list<Entity*>::const_iterator it = contain.begin(); it != contain.cend(); ++it)
+	{
+		if ((*it)->type == T_NPC)
+		{
+			Item* item = (Item*)*it;
+			cout << "\n- In the Room you found a person called " << item->name << "\n";
+		}
+	}
 	/* ITEMS*/
 	for (list<Entity*>::const_iterator it = contain.begin(); it != contain.cend(); ++it)
 	{
