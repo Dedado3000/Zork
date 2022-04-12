@@ -27,7 +27,7 @@ void Player::Look(const vector<string>& args) const
 	{
 		parent->Look();
 	}
-	//Look Yourself/A path/An Item in the room or your inventory
+	//Look Yourself/A path/An Item in the room or your inventory//NPC
 	else if (args.size() == 2)
 	{
 		if (IsEquals(args[1], "me"))
@@ -64,6 +64,16 @@ void Player::Look(const vector<string>& args) const
 					if (item->name.compare(args[1]) == 0)
 					{
 						item->Look();
+						return;
+					}
+				}
+
+				if ((*it)->type == T_NPC || (*it)->type == T_Creature)
+				{
+					Creature* creature = (Creature*)*it;
+					if (creature->name.compare(args[1]) == 0)
+					{
+						creature->Look(args);
 						return;
 					}
 				}

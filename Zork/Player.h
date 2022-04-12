@@ -10,15 +10,16 @@ public:
 	Player(const char* name, const char* description, Room* room);
 	~Player() {};
 
+	void update() {};
 	/* HELPERS */
-	virtual void Inventory() const;
+	void Inventory() const;
 
 	/* ACTIONS */
-	virtual bool Go(const vector<string>& args);
-	virtual void Look(const vector<string>& args) const;
-	virtual bool Take(const vector<string>& args);
-	virtual bool Drop(const vector<string>& args);
-	virtual bool Open(const vector<string>& args);
-	virtual bool Close(const vector<string>& args);
+	bool Go(const vector<string>& args);
+	void Look(const vector<string>& args) const;
+	bool Take(const vector<string>& args);
+	bool Drop(const vector<string>& args);
+	bool Open(const vector<string>& args);
+	bool Close(const vector<string>& args);
 };
 
