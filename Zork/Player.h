@@ -21,5 +21,8 @@ public:
 	bool Drop(const vector<string>& args);
 	bool Open(const vector<string>& args);
 	bool Close(const vector<string>& args);
+	bool Talk(const vector<string>& args);
+	bool Give(const vector<string>& args);
+
 };
 

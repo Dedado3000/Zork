@@ -11,6 +11,8 @@ enum Direction
 	D_East,
 	D_South,
 	D_West,
+	D_Up,
+	D_Down,
 	D_Novalid
 };
 

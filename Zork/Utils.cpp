@@ -53,6 +53,10 @@ Direction ConvertString(string strdir)
 		dir = D_West;
 	else if (strdir.compare("East") == 0 || strdir.compare("east") == 0 || strdir.compare("e") == 0)
 		dir = D_East;
+	else if (strdir.compare("Up") == 0 || strdir.compare("u") == 0 || strdir.compare("up") == 0)
+		dir = D_Up;
+	else if (strdir.compare("Down") == 0 || strdir.compare("d") == 0 || strdir.compare("down") == 0)
+		dir = D_Down;
 
 	return dir;
 }

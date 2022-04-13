@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Exit.h"
 #include "Item.h"
+#include "NPC.h"
 #include "Room.h"
 #include "Utils.h"
 #include <iostream>
@@ -122,7 +123,7 @@ bool Player::Go(const vector<string>& args)
 			return true;
 		}
 
-		cout << "\nYou go From your position to " << exit->GetDestinationFrom((Room*)parent)->name << "...\n" << "When you arrive you";
+		cout << "\nYou go From your position to " << exit->GetDestinationFrom((Room*)parent)->name << "...\n" << "When you arrive you take a look...";
 		ChangeParent(exit->GetDestinationFrom((Room*)parent));
 		parent->Look();
 		return true;
@@ -333,5 +334,111 @@ bool Player::Close(const vector<string>& args)
 		}
 	}
 	cout << "-|- There is no Path with the name " << args[1] << "\n";
+	return true;
+}
+
+
+/*
+* Talk()
+* Receive the input from a NPC
+* Input:
+	vector<string>& args <- Instructions to talk
+  Output:
+	bool <- The action can be performed
+  Console Output:
+	The action you made if its posible
+*/
+bool Player::Talk(const vector<string>& args)
+{
+
+
+	for (list<Entity*>::const_iterator it = parent->contain.begin(); it != parent->contain.cend(); ++it)
+	{
+		if ((*it)->type == T_NPC)
+		{
+			NPC* npc = (NPC*)*it;
+			if (npc->name.compare(args[1]) == 0)
+			{
+				if (!npc->completedQuest)
+				{
+					cout << "\n - " << npc->name << ":" << npc->talkQuest << ".\n";
+				}
+				else
+				{
+					cout << "\n - " << npc->name << ":" << npc->talkEndedQuest << ".\n";
+				}
+				return true;
+			}
+		}
+	}
+
+	cout << "\nThere is nobody to talk named " << args[1] << ".\n";
+
+	return true;
+}
+
+
+/*
+* Talk()
+* Receive the input from a NPC
+* Input:
+	vector<string>& args <- Instructions to go
+  Output:
+	bool <- The action can be performed
+  Console Output:
+	The action you made if its posible
+*/
+bool Player::Give(const vector<string>& args)
+{
+
+	NPC* npc = NULL;
+	for (list<Entity*>::const_iterator it = parent->contain.begin(); it != parent->contain.cend(); ++it)
+	{
+		if ((*it)->type == T_NPC)
+		{
+			npc = (NPC*)*it;
+			if (npc->name.compare(args[1]) == 0)
+			{
+				if (npc->completedQuest)
+				{
+					cout << "\n - " << npc->name << ": Boy, You give my "<< npc->wanted->name <<" a second ago.\n";
+					return true;
+				}
+			}
+		}
+	}
+
+	if (npc != NULL)
+	{
+
+		for (list<Entity*>::const_iterator it = contain.begin(); it != contain.cend(); ++it)
+		{
+			if ((*it)->type == T_Item)
+			{
+				Item* item = (Item*)*it;
+				if (item->name.compare(args[2]) == 0)
+				{
+					if (item == npc->wanted)
+					{
+						cout << "\n - " << npc->name << ": "<< npc->talkEndedQuest <<".\n";
+						npc->completedQuest = true;
+						item->ChangeParent(npc);
+						return true;
+					}
+					cout << "\n - " << npc->name << ": I don't want this.\n";
+					return true;
+
+				}
+			}
+		}
+	}
+	else
+	{
+		cout << "\nThere is nobody to give the item named " << args[1] << ".\n";
+	}
+
+	cout << "\n#Error404 Item not Found .\n";
+
+
 	return true;
 }
