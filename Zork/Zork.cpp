@@ -11,12 +11,6 @@
 using namespace std;
 
 
-#define MACHINECOLOR_ "\033[1;36m"
-#define _MACHINECOLOR "\033[0m"
-
-
-#define ERRORCOLOR_ "\033[4;31m"
-#define _ERRORCOLOR "\033[0m"
 
 int main()
 {
@@ -26,7 +20,7 @@ int main()
 	args.reserve(10);
 
 	cout << "-------------------------\n";
-	cout << MACHINECOLOR_ "Welcome to Zork by David Martin!\n" _MACHINECOLOR;
+	cout << "Welcome to Zork by David Martin!\n";
 	cout << "-------------------------\n";
 
 	World world;
@@ -49,7 +43,7 @@ int main()
 
 		//Loop de juego
 		if (world.PerformAction(args) == false)
-			cout << ERRORCOLOR_ "\nNo valid action input.\n" _ERRORCOLOR;
+			cout << "\nNo valid action input.\n";
 
 
 
@@ -63,7 +57,9 @@ int main()
 	}
 
 
-	cout << MACHINECOLOR_ "\nThanks for playing my game\n" _MACHINECOLOR;
+	cout << "<------------------------->\n";
+	cout <<  "\nThanks for playing my game\n" ;
+	cout << "<------------------------->\n";
 	return 0;
 }
 

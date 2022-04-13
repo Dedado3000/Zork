@@ -61,6 +61,10 @@ const string Exit::ConvertDirection(Direction dir) const
 			break;
 		case 3: str = "West";
 			break;
+		case 4: str = "Up";
+			break;
+		case 5: str = "Down";
+			break;
 		default:
 			break;
 	}
