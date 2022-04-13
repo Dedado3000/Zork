@@ -15,7 +15,7 @@ The game will be considered finished when you help your friend Timmy or you find
 - How to play:
 In the game you will have to move in the map using a list of commands you can read Bellow, you can access to this info typing help after version 1.1 of the game
 
-//All the commands bellow are caps sensitive, actions can be all in minus or the first letter in caps, all the items, paths or NPC starts with caps
+//All the commands bellow are caps sensitive, actions must be written in minus and all the items, paths or NPC starts with caps
 - Command List:
 - 1 Word Commands
   - Look //Look Around
