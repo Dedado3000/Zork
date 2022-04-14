@@ -27,7 +27,7 @@ World::World()
 	/* CONECTIONS*/
 	Exit* exit1 = new Exit("Path", "An old path who lived better times", Facade, Street, D_South, D_North);
 	Exit* exit2 = new Exit("Door", "An old who seems locked", Facade, House, D_West, D_East);
-	Exit* exit3 = new Exit("Door", "An old who seems locked", House, Basement, D_Down, D_Up);
+	Exit* exit3 = new Exit("Ladders", "A path to the basemebnt", House, Basement, D_Down, D_Up);
 
 	exit2->locked = true;
 
@@ -39,7 +39,7 @@ World::World()
 
 	Item* item1 = new Item("Trash", "A typical big trash who seem empty", Basement, I_Container, "Maybe there is something inside");
 	Item* item2 = new Item("Letter", "A letter with typical congrats text, try to look", item1, I_Common, "Thanks, you found the 'easterEgg', this isn't the item that Timmy is searching");
-	Item* toy = new Item("Toy", "Timmy Favourite Toy, it's a giant square", item1, I_Common, "Thank you for playing my game, you can exit typing 'exit' or 'quit'");
+	Item* toy = new Item("Toy", "Timmy Favourite Toy, it's a giant square", item1, I_Common, "Give it to timmy");
 	Item* mailBox = new Item("Mailbox", "An open mailbox, maybe you can take a look inside ", Facade, I_Container, "");
 	Item* mail = new Item("Mail", "Hello, im your friend Timmy, can you take my keys from the street and come to my place", mailBox, I_Common, "");
 
@@ -118,6 +118,24 @@ bool World::ConvertAction(vector<string>& args)
 			player->Inventory();
 		else if (IsEquals(args[0], "go"))
 			cout << "Go where?\n";
+		else if (IsEquals(args[0], "help"))
+			cout << "//All the commands bellow are caps sensitive, actions must be written in minus and \n	all the items, paths or NPC starts with caps\n"<<
+					"Command List :\n" <<
+					"1 Word Commands\n" <<
+					" look //Look Around\n" <<
+					" inventory //Seek in your inventory\n" <<
+					"2 Words Commands\n" <<
+					" look <me - Item - Npc - Path> //Look the information of that thing\n" <<
+					" go <Direction> //Go that Direction #see directions bellow\n" <<
+					" pick / Drop <Item> //Pick or Drop and Item from Floor\n" <<
+					" talk <NPC> //Talk to a NPC\n" <<
+					"3 Words Commands\n" <<
+
+					" open / Close <Path> <Item> //Open or Close Path with the Item\n" <<
+					" pick / Drop <Item1> <Item2> //Pick or Drop Item2 from Item1\n" <<
+					" give <NPC> <Item> //Give and Item he wanted to a NPC\n" <<
+					"Utils\n" <<
+					" Directions : North, South, West, East, Up, Down\n";
 		else
 			canConvert = false;
 		break;

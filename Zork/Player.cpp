@@ -34,13 +34,14 @@ void Player::Look(const vector<string>& args) const
 		if (IsEquals(args[1], "me"))
 		{
 			Creature::Look(args);
-			cout << "> I think I must save the world, no lose the time looking myself \n";
+			cout << "> I think I must save the world, not losing the time looking myself \n";
 
 		}
 		else if (ConvertString(args[1]) != D_Novalid)
 		{
 			bool found = false;
-			for (list<Entity*>::const_iterator it = parent->contain.begin(); it != parent->contain.cend(); ++it)
+			Exit* exit = ((Room*)parent)->GetExit(ConvertString(args[1]));
+			/*for (list<Entity*>::const_iterator it = parent->contain.begin(); it != parent->contain.cend(); ++it)
 			{
 				if ((*it)->type == T_Exit)
 				{
@@ -51,8 +52,12 @@ void Player::Look(const vector<string>& args) const
 						found = true;
 					}
 				}
+			}*/
+			if (exit != NULL)
+			{
+				exit->Look();
 			}
-			if (!found)
+			else
 				cout << "> I don't see any Path in the " << args[1] << "\n";
 		}
 		else

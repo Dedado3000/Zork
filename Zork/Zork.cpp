@@ -22,10 +22,11 @@ int main()
 	cout << "-------------------------\n";
 	cout << "Welcome to Zork by David Martin!\n";
 	cout << "-------------------------\n";
+	cout << "If you need a hand type 'Help'\n";
 
 	World world;
 
-	args.push_back("look");
+	//args.push_back("look");
 
 	while (true)
 	{
