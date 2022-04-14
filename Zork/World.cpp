@@ -27,7 +27,7 @@ World::World()
 	/* CONECTIONS*/
 	Exit* exit1 = new Exit("Path", "An old path who lived better times", Facade, Street, D_South, D_North);
 	Exit* exit2 = new Exit("Door", "An old who seems locked", Facade, House, D_West, D_East);
-	Exit* exit3 = new Exit("Door", "An old who seems locked", House, Basement, D_Down, D_Up);
+	Exit* exit3 = new Exit("Ladders", "A path to the basemebnt", House, Basement, D_Down, D_Up);
 
 	exit2->locked = true;
 
@@ -39,7 +39,7 @@ World::World()
 
 	Item* item1 = new Item("Trash", "A typical big trash who seem empty", Basement, I_Container, "Maybe there is something inside");
 	Item* item2 = new Item("Letter", "A letter with typical congrats text, try to look", item1, I_Common, "Thanks, you found the 'easterEgg', this isn't the item that Timmy is searching");
-	Item* toy = new Item("Toy", "Timmy Favourite Toy, it's a giant square", item1, I_Common, "Thank you for playing my game, you can exit typing 'exit' or 'quit'");
+	Item* toy = new Item("Toy", "Timmy Favourite Toy, it's a giant square", item1, I_Common, "Give it to timmy");
 	Item* mailBox = new Item("Mailbox", "An open mailbox, maybe you can take a look inside ", Facade, I_Container, "");
 	Item* mail = new Item("Mail", "Hello, im your friend Timmy, can you take my keys from the street and come to my place", mailBox, I_Common, "");
 
