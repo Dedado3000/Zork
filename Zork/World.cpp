@@ -118,6 +118,24 @@ bool World::ConvertAction(vector<string>& args)
 			player->Inventory();
 		else if (IsEquals(args[0], "go"))
 			cout << "Go where?\n";
+		else if (IsEquals(args[0], "help"))
+			cout << "//All the commands bellow are caps sensitive, actions must be written in minus and \n	all the items, paths or NPC starts with caps\n"<<
+					"Command List :\n" <<
+					"1 Word Commands\n" <<
+					" look //Look Around\n" <<
+					" inventory //Seek in your inventory\n" <<
+					"2 Words Commands\n" <<
+					" look <me - Item - Npc - Path> //Look the information of that thing\n" <<
+					" go <Direction> //Go that Direction #see directions bellow\n" <<
+					" pick / Drop <Item> //Pick or Drop and Item from Floor\n" <<
+					" talk <NPC> //Talk to a NPC\n" <<
+					"3 Words Commands\n" <<
+
+					" open / Close <Path> <Item> //Open or Close Path with the Item\n" <<
+					" pick / Drop <Item1> <Item2> //Pick or Drop Item2 from Item1\n" <<
+					" give <NPC> <Item> //Give and Item he wanted to a NPC\n" <<
+					"Utils\n" <<
+					" Directions : North, South, West, East, Up, Down\n";
 		else
 			canConvert = false;
 		break;
